@@ -1,0 +1,98 @@
+﻿
+
+
+<div class="title-bikes"><p> All Bikes </p></div>
+<div class="row mt-5 mb-2"></div>
+<form method="get" asp-action="List" >
+    <div class="input-group mb-2">
+        <input name="search" value="@ViewBag.value" id="search-bike"type="text" class="form-control" placeholder="Find your bike..." aria-label="Bike model" aria-describedby="button-addon2">
+        @{
+            if (!string.IsNullOrEmpty(ViewBag?.value))
+            {
+                <a asp-controller="Bike" asp-action="List">X</a>
+            }
+        }
+        
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" id="search-button">Button</button>
+        </div>
+    </div>
+</form>
+@{
+    foreach (var bike in Model.AllBikes)
+    {
+
+        <div class="col-sm">
+        <img class="img-thumbnail" src="@bike.img" alt="@bike.name" />
+        <h2>@bike.name</h2>
+        <div class="bike-description">
+            <p class="responsive-text">@bike.descriptionBike</p>
+        </div>
+        <div class="bike-price">
+            <p>Price: @bike.priceBike.ToString("c")</p>
+        </div>
+        @if (bike.categoryID == 1)
+        {
+            <div class="mBike-category">
+                <p>Category:</p>
+                <p>@bike.Category.categoryName</p>
+            </div>
+        }
+        else
+        {
+            <div class="mBike-category">
+                <p>Category:</p>
+                <p>@bike.Category.categoryName</p>
+            </div>
+        }
+        @if (bike.available == true)
+        {
+            <div class="available">
+                <p class="font-color-available">Available: </p>
+                <span class="checkmark">
+                    <div class="checkmark_circle"></div>
+                    <div class="checkmark_stem"></div>
+                    <div class="checkmark_kick"></div>
+                </span>
+            </div>
+        }
+        else
+        {
+            
+            <div class="not-available">
+                <p class="font-color-not-available">Not available: </p>
+                <span class="not-checkmark">
+                    <div class="not-checkmark_circle"></div>
+                    <div class="not-checkmark_stem"></div>
+                    <div class="not-checkmark_kick"></div>
+                </span>
+            </div>
+        }
+        <p><a class="btn" id="btn-details-list" href="#">Details</a></p>
+
+    </div>
+       
+        
+    }
+}
+
+
+
+
+<style>
+    #search-button {
+        display: inline-block;
+        background-size: 30px;
+        opacity: 0.8;
+        border: 1px transparent;
+        margin-top: 2%;
+        border-radius: 10px;
+        font-size: 20px;
+        background-color: white;
+        color: red;
+        width: 130px;
+    }
+    #btn-details-list{
+        margin-left: 45%;    
+    }
+</style>

@@ -1,0 +1,56 @@
+﻿@model ContactsViewModel;
+
+@using BikeShop.Repository
+
+@* <div class="map">
+
+    </div>*@
+<div class="container-contacts">
+    <div style="text-align:center">
+        <h2>Contact Us</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+            <iframe width="500" height="400" frameborder="0" scrolling="no" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Valea%20Crucii%2022+(BikeShop)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            <h4>Our number: @Model.AllContactses[0].number</h4>
+            <h4>Address: @Model.AllContactses[0].address</h4>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="row">
+            <form asp-action="Contacts">
+                <div class="form-group">
+                    <label asp-for="@Model.Form.firstName" class="control-label">Your First Name:</label>
+                    <input asp-for="@Model.Form.firstName" class="form-control" placeholder="ex: John" />
+                    <span asp-validation-for="@Model.Form.firstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Form.lastName" class="control-label">Your Last Name:</label>
+                    <input asp-for="@Model.Form.lastName" class="form-control" placeholder="ex: Doe" />
+                    <span asp-validation-for="@Model.Form.lastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Form.email" class="control-label">Your E-mail:</label>
+                    <input asp-for="@Model.Form.email" class="form-control" placeholder="ex: JohnDoe@gmail.com" />
+                    <span asp-validation-for="@Model.Form.email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Form.selectedItem" name="SelectedItem">Choose your country:</label>
+                    <select asp-for="@Model.Form.selectedItem" name="SelectedItem" asp-items="@Model.Form.selectList">Country</select>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Form.message" class="control-label">Your message:</label>
+                    <textarea rows="10" asp-for="@Model.Form.message" class="form-control" placeholder="Your message.."></textarea>
+                </div>
+
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
